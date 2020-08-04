@@ -67,7 +67,7 @@ public struct RGBAImage {
         let bufferPointer = UnsafeMutableBufferPointer<Pixel>(start: imageData, count: width * height)
         pixels = Array(bufferPointer)
         
-        imageData.deinitialize()
+//        imageData.deinitialize()
         imageData.deinitialize(count: width * height)
     }
     
@@ -80,7 +80,7 @@ public struct RGBAImage {
       
         let imageDataReference = UnsafeMutablePointer<Pixel>(mutating: pixels)
         defer {
-            imageDataReference.deinitialize()
+            imageDataReference.deinitialize(count: width * height)
         }
         let imageContext = CGContext(data: imageDataReference, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo, releaseCallback: nil, releaseInfo: nil)
         
